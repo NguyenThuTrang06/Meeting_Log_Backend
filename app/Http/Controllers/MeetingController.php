@@ -47,10 +47,10 @@ class MeetingController extends Controller
             'video_link' => 'nullable|string',
             'short_summary' => 'nullable|string',
             'overview' => 'nullable|string',
-            'action_items' => 'nullable|array',
-            'decisions' => 'nullable|array',
-            'issues' => 'nullable|array',
-            'next_steps' => 'nullable|array',
+            'action_items' => 'nullable|string',
+            'decisions' => 'nullable|string',
+            'issues' => 'nullable|string',
+            'next_steps' => 'nullable|string',
         ]);
 
         $meeting = Meeting::create($data);

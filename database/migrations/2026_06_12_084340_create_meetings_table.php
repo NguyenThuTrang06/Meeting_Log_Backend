@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('video_link')->nullable();
             $table->text('short_summary')->nullable();
             $table->text('overview')->nullable();
-            $table->json('action_items')->nullable();
-            $table->json('decisions')->nullable();
-            $table->json('issues')->nullable();
-            $table->json('next_steps')->nullable();
+            $table->text('action_items')->nullable();
+            $table->text('decisions')->nullable();
+            $table->text('issues')->nullable();
+            $table->text('next_steps')->nullable();
             $table->timestamps();
         });
     }
