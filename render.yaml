@@ -3,14 +3,13 @@ services:
     name: backend-meeting-logs
     env: docker
     plan: free
-    dockerCommand: "php artisan serve --host=0.0.0.0 --port=$PORT"
     envVars:
       - key: APP_NAME
         value: "Meeting Logs API"
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        generateValue: true
+        value: "base64:p+TZ25AHfSOyYr3O+RU6BMJvxXI+eFN8+D9pNAcC1yQ="
       - key: APP_DEBUG
         value: false
       - key: APP_URL
