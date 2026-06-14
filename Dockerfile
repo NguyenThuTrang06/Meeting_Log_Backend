@@ -40,4 +40,4 @@ RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
 EXPOSE 8000
 
 # Start command
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+CMD php artisan migrate --force && php artisan import:meetings && php artisan serve --host=0.0.0.0 --port=$PORT
