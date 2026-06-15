@@ -9,7 +9,7 @@ class MeetingController extends Controller
 {
     public function index(Request $request)
     {
-        $meetings = Meeting::orderBy('meeting_date', 'desc')->paginate(20);
+        $meetings = Meeting::orderBy('meeting_date', 'desc')->get();
         return response()->json($meetings);
     }
 
