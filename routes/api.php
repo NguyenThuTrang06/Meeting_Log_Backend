@@ -10,6 +10,7 @@ Route::get('/user', function (Request $request) {
 
 // CRUD endpoints cho frontend React
 Route::apiResource('meetings', MeetingController::class);
+Route::apiResource('members', App\Http\Controllers\MemberController::class);
 
 // Webhook endpoint cho n8n gửi dữ liệu vào
 Route::post('webhook/n8n-meeting', [MeetingController::class, 'webhook']);
