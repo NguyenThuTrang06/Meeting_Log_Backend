@@ -35,6 +35,13 @@ class MeetingController extends Controller
 
     public function webhook(Request $request)
     {
+        $input = $request->all();
+        if (isset($input['duration_minutes']) && is_string($input['duration_minutes'])) {
+            $input['duration_minutes'] = (int) preg_replace('/\D/', '', $input['duration_minutes']);
+        }
+        
+        $request->replace($input);
+
         $data = $request->validate([
             'week' => 'nullable|string',
             'meeting_date' => 'nullable|string',
@@ -51,6 +58,7 @@ class MeetingController extends Controller
             'decisions' => 'nullable|string',
             'issues' => 'nullable|string',
             'next_steps' => 'nullable|string',
+            'sheet_link' => 'nullable|string',
         ]);
 
         $meeting = Meeting::create($data);
