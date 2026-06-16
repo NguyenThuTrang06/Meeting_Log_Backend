@@ -40,6 +40,18 @@ class MeetingController extends Controller
             $input['duration_minutes'] = (int) preg_replace('/\D/', '', $input['duration_minutes']);
         }
         
+        if (isset($input['meeting_date'])) {
+            try {
+                if (preg_match('/\d{2}\/\d{2}\/\d{4}/', $input['meeting_date'])) {
+                    $input['meeting_date'] = \Carbon\Carbon::createFromFormat('d/m/Y H:i', trim($input['meeting_date']))->format('Y-m-d H:i:s');
+                } else {
+                    $input['meeting_date'] = \Carbon\Carbon::parse(trim($input['meeting_date']))->format('Y-m-d H:i:s');
+                }
+            } catch (\Exception $e) {
+                // Keep original if parsing fails
+            }
+        }
+        
         $request->replace($input);
 
         $data = $request->validate([
