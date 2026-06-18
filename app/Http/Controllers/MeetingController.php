@@ -59,6 +59,10 @@ class MeetingController extends Controller
             }
         }
         
+        if (isset($input['link_summary']) && empty($input['sheet_link'])) {
+            $input['sheet_link'] = $input['link_summary'];
+        }
+        
         $request->replace($input);
 
         $data = $request->validate([
