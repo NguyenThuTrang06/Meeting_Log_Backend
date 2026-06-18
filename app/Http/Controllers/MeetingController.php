@@ -42,10 +42,17 @@ class MeetingController extends Controller
         
         if (isset($input['meeting_date'])) {
             try {
+                $parsedDate = null;
                 if (preg_match('/\d{2}\/\d{2}\/\d{4}/', $input['meeting_date'])) {
-                    $input['meeting_date'] = \Carbon\Carbon::createFromFormat('d/m/Y H:i', trim($input['meeting_date']))->format('Y-m-d H:i:s');
+                    $parsedDate = \Carbon\Carbon::createFromFormat('d/m/Y H:i', trim($input['meeting_date']));
                 } else {
-                    $input['meeting_date'] = \Carbon\Carbon::parse(trim($input['meeting_date']))->format('Y-m-d H:i:s');
+                    $parsedDate = \Carbon\Carbon::parse(trim($input['meeting_date']));
+                }
+                $input['meeting_date'] = $parsedDate->format('Y-m-d H:i:s');
+                
+                // Auto calculate week if not provided
+                if (empty($input['week'])) {
+                    $input['week'] = "Tuần " . $parsedDate->isoWeek;
                 }
             } catch (\Exception $e) {
                 // Keep original if parsing fails
@@ -61,6 +68,7 @@ class MeetingController extends Controller
             'project_id' => 'nullable|string',
             'team' => 'nullable|string',
             'leader' => 'nullable|string',
+            'members' => 'nullable|string',
             'name' => 'required|string',
             'duration_minutes' => 'nullable|integer',
             'video_link' => 'nullable|string',
